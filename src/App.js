@@ -11,13 +11,13 @@ function App() {
     )
       .then((response) => response.json())
       .then((data) => setArticles(data.articles));
-  });
+  }, []);
   return (
     <div className="App">
-      <Button variant="contained" color="primary">
-        hello
-      </Button>
-      <News></News>
+      <h1> article length : {articles.length}</h1>
+      {articles.map((article) => (
+        <News article={article}></News>
+      ))}
     </div>
   );
 }
