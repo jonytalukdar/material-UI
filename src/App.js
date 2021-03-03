@@ -14,7 +14,6 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <h1> article length : {articles.length}</h1>
       {articles.map((article) => (
         <News article={article}></News>
       ))}

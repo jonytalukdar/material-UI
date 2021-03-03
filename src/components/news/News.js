@@ -44,7 +44,7 @@ const News = (props) => {
           <Button size="small" color="primary">
             Share
           </Button>
-          <Button size="small" color="primary">
+          <Button variant="contained" color="primary">
             Learn More
           </Button>
         </CardActions>
