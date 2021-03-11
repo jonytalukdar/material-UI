@@ -1,24 +1,20 @@
-import './App.css';
-import Button from '@material-ui/core/Button';
-import News from './components/news/News';
-import { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { AccessAlarm, ThreeDRotation, ThumbUpAlt } from '@material-ui/icons';
 
-function App() {
-  const [articles, setArticles] = useState([]);
-  useEffect(() => {
-    fetch(
-      'https://newsapi.org/v2/top-headlines?country=us&apiKey=270e491750014e89a47d15979365477a'
-    )
-      .then((response) => response.json())
-      .then((data) => setArticles(data.articles));
-  }, []);
+const App = () => {
+  const [likeColor, setLikeColor] = useState('');
+  const handleClick = () => {
+    const newColor = likeColor ? '' : 'primary';
+    setLikeColor(newColor);
+  };
   return (
-    <div className="App">
-      {articles.map((article) => (
-        <News article={article}></News>
-      ))}
+    <div>
+      <h1>hello</h1>
+      <AccessAlarm></AccessAlarm>
+      <ThreeDRotation></ThreeDRotation>
+      <ThumbUpAlt onClick={handleClick} color={likeColor}></ThumbUpAlt>
     </div>
   );
-}
+};
 
 export default App;
