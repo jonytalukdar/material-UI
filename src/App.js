@@ -37,7 +37,10 @@ const App = () => {
         <h1>{user.name}</h1>
       ))}
       {randomUser.map((random) => (
-        <h2>{random.gender}</h2>
+        <div>
+          <h1>Name : {random.name.first}</h1>
+          <h2>Email : {random.email}</h2>
+        </div>
       ))}
     </div>
   );
