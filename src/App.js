@@ -1,18 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AccessAlarm, ThreeDRotation, ThumbUpAlt } from '@material-ui/icons';
 
 const App = () => {
   const [likeColor, setLikeColor] = useState('');
-  const handleClick = () => {
-    const newColor = likeColor ? '' : 'primary';
-    setLikeColor(newColor);
-  };
+  const [users, setUsers] = useState([]);
+  const [randomUser, setRandomUser] = useState([]);
+  const [signleUser, setSingleUser] = useState({});
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/users`)
+      .then((response) => response.json())
+      .then((data) => {
+        setUsers(data);
+        console.log(data[0].name);
+      });
+    // signle user
+    fetch('https://jsonplaceholder.typicode.com/users/1')
+      .then((response) => response.json())
+      .then((data) => setSingleUser(data));
+
+    fetch(`https://randomuser.me/api/`)
+      .then((response) => response.json())
+      .then((data) => setRandomUser(data.results));
+  }, []);
+
   return (
     <div>
       <h1>hello</h1>
       <AccessAlarm></AccessAlarm>
       <ThreeDRotation></ThreeDRotation>
-      <ThumbUpAlt onClick={handleClick} color={likeColor}></ThumbUpAlt>
+      <ThumbUpAlt
+        onClick={() => setLikeColor(likeColor ? '' : 'primary')}
+        color={likeColor}
+      ></ThumbUpAlt>
+      <h1>{signleUser.id}</h1>
+      {users.map((user) => (
+        <h1>{user.name}</h1>
+      ))}
+      {randomUser.map((random) => (
+        <h2>{random.gender}</h2>
+      ))}
     </div>
   );
 };
